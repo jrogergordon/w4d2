@@ -9,15 +9,24 @@ class Board
                 if idx == 0 || idx == 7 || idx == 1 || idx == 6
                     @board[idx][idx_0] = "p"
                 else
-                    @board[idx][idx_0] = nil
+                    @board[idx][idx_0] = NullPiece.new
                 end
             end
         end
     end
 
+    def[](pos)
+        @board[pos[0]][pos[1]]
+    end
+
+
+    def []=(pos,val)
+        @board[pos[0]][pos[1]]=val
+    end
+
     def move_piece(start_pos, end_pos)
         raise "out of bounds" if (start_pos[0] > 7 || start_pos[0] < 0) || (start_pos[1] < 0 || start_pos[1] > 7)
-        raise "no piece here" if @board[start_pos[0]][start_pos[1]] == nil
+        raise "no piece here" if @board[start_pos[0]][start_pos[1]].is_a?(NullPiece)
         raise "out of bounds" if (end_pos[0] > 7 || end_pos[0] < 0) || (end_pos[1] < 0 || end_pos[1] > 7)
         piece_in_hand = @board[start_pos[0]][start_pos[1]]
         @board[start_pos[0]][start_pos[1]] = nil
