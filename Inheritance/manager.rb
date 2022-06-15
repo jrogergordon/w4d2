@@ -9,13 +9,14 @@ class Manager < Employee
 
     def bonus(multiplier)
         sum = 0
-        employees.each do |ele|
-            sum += ele.salary
+        @employees.each do |ele|
+            if ele.is_a?(Manager)
+                sum += ele.salary + ele.bonus(1)
+            else
+                sum += ele.salary
+            end
         end
         sum * multiplier
     end
-
-    
-
     
 end
